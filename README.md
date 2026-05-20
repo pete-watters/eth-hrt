@@ -76,17 +76,25 @@ Sanity-check the decoder without the UI (runs against the 12 sample txs):
 pnpm smoke
 ```
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare
+
+This deploys as a **Cloudflare Worker** (via `@opennextjs/cloudflare` — note `wrangler.jsonc`), not the legacy Pages product.
+
+### CI: Cloudflare Workers Builds (deploy on push)
+
+Connect the repo in the Cloudflare dashboard (*Workers → Create → Connect to Git*) and set:
+
+- **Build command:** `pnpm run cf:build`
+- **Deploy command:** `pnpm run cf:deploy`
+
+Both use the locally-installed `@opennextjs/cloudflare` bin via pnpm script PATH resolution — don't use `pnpm dlx`, which fetches a differently-named package and fails with `ERR_PNPM_DLX_NO_BIN`.
+
+### Manual deploy from your machine
 
 ```sh
-pnpm deploy
+pnpm dlx wrangler login   # one-time
+pnpm deploy               # build + deploy
 ```
-
-Runs `opennextjs-cloudflare build` (produces `.open-next/`) then `opennextjs-cloudflare deploy`. First-time setup:
-
-1. `pnpm dlx wrangler login`
-2. `pnpm cf-typegen` to generate `cloudflare-env.d.ts`
-3. `pnpm deploy`
 
 Local preview of the production worker bundle: `pnpm preview`.
 
