@@ -1,0 +1,21 @@
+@layer reset, base, tokens, recipes, utilities;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: token(colors.ink.background-primary);
+  color: token(colors.ink.text-primary);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: token(colors.blue.action-primary-default);
+  color: token(colors.ink.background-primary);
+}
